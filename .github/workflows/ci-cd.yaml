@@ -1,0 +1,25 @@
+name: Continues Integration and Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code 🛎 
+        uses: actions/checkout@v2
+      
+      - name: Setup dotnet 5.0 🔐
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "5.0.x"
+      
+      - name: Restore dependencies 🐕
+        run: dotnet restore
+      
+      - name: Build app 🎸
+        run: dotnet build -c Release --no-restore
+      
