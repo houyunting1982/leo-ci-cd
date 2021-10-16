@@ -13,7 +13,10 @@ namespace Web.Tests {
         [Fact]
         public async Task CustomerIntegrationTest() {
             // Create a DB context
-            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
 
             var optionsBuilder = new DbContextOptionsBuilder<CustomerContext>();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
